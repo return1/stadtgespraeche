@@ -1,0 +1,54 @@
+<metal:page define-macro="master"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      dir="ltr" lang="de">
+<head>
+<meta name="author" content="return1.at" />
+<meta name="generator" content="Zope 3, see www.zope.org" />
+<meta name="robots" content="index, follow" />
+<meta name="description" lang="de" content="Die Stadtgespr&auml;che zeigen Fundst&uuml;cke aus vielen L&auml;ndern &#8211; Fotos von Schriften, Logos, Zeichen, Pictogrammenn, Buchstaben, Wappen und anderen typografischen Werken." />
+<meta name="keywords" lang="de" content="Stadtgespr&auml;che Typographie" /> 
+<meta http-equiv="Content-Language" content="de" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-1079604-2";
+urchinTracker();
+</script>
+<link rel="stylesheet" type="text/css" href="/@@/css/styles.css" />
+<title>Stadtgespr&auml;che</title>
+<metal:slot define-slot="headers" />
+</head>
+<body>
+<div id="horizontal">&nbsp;</div>
+<div id="left">&nbsp;</div>
+<a href="/"><img id="logo" src="/@@/images/logo.gif" alt="Home" /></a>
+
+<div id="nav1" class="normal">
+	<a href="/@@neu.html" tal:attributes="class python:view.is_true(str(request.URL).endswith('neu.html'), 'nav1h','nav1l')">Neu</a> | 
+	<a href="/@@orientierung.html" tal:attributes="class python:view.is_true(str(request.URL).endswith('orientierung.html'), 'nav1h','nav1l')">Orientierung</a> | 
+	<a href="/@@info.html" tal:attributes="class python:view.is_true(str(request.URL).endswith('info.html'), 'nav1h','nav1l')">Info</a> | 
+	<a href="/@@links.html" tal:attributes="class python:view.is_true(str(request.URL).endswith('links.html'), 'nav1h','nav1l')">Links</a> | 
+	<a href="/@@sammler.html" tal:attributes="class python:view.is_true(str(request.URL).endswith('sammler.html'), 'nav1h','nav1l')">Sammler</a> | 
+        <a href="/interviews/index.html" class="nav1l">Interviews</a> |
+	<a href="/technik" tal:attributes="class python:view.is_true(str(request.URL).endswith('/technik'), 'nav1h','nav1l')">Technik</a> |
+	<a href="/@@impressum.html" tal:attributes="class python:view.is_true(str(request.URL).endswith('impressum.html'), 'nav1h','nav1l')">Impressum</a>
+</div>
+
+<div id="nav2" class="normal">
+	<tal:repeat repeat="level context/@@getEntryNavigation">
+	<tal:repeat repeat="item level">
+		<a tal:content="item/name" tal:attributes="href string:${item/url}/entry.html; class item/class|string:none"></a> | 
+	</tal:repeat><br/>
+	</tal:repeat>
+</div>
+
+<div id="cont" metal:define-slot="content">
+</div>
+
+<metal:slot define-slot="more" />
+
+</body>
+</html>
+</metal:page>

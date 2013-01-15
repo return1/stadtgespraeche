@@ -1,0 +1,9 @@
+<metal:page use-macro="context/@@sgs.mastertemplate/master">
+
+<div metal:fill-slot="content" id="cont" class="textonly usercontent linklist">
+
+<p tal:content="structure view/view_links" />
+
+</div>
+
+</metal:page>

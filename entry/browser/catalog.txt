@@ -1,0 +1,100 @@
+SGS Catalog Test
+================
+
+This test covers a catalog search for Entries.
+
+  >>> from zope.component import provideUtility
+  >>> from sgs.entry.interfaces import IEntryNav, IEntry
+
+We use a fake int id utility here so we can test independent of
+the full-blown zope environment::
+
+  >>> from zope import interface
+  >>> import zope.app.intid.interfaces
+  >>> class DummyIntId(object):
+  ...     interface.implements(zope.app.intid.interfaces.IIntIds)
+  ...     MARKER = '__dummy_int_id__'
+  ...     def __init__(self):
+  ...         self.counter = 0
+  ...         self.data = {}
+  ...     def register(self, obj):
+  ...         intid = getattr(obj, self.MARKER, None)
+  ...         if intid is None:
+  ...             setattr(obj, self.MARKER, self.counter)
+  ...             self.data[self.counter] = obj
+  ...             intid = self.counter
+  ...             self.counter += 1
+  ...         return intid
+  ...     def getObject(self, intid):
+  ...         return self.data[intid]
+  ...     def __iter__(self):
+  ...         return iter(self.data)
+  >>> intid = DummyIntId()
+  >>> provideUtility(intid, zope.app.intid.interfaces.IIntIds)
+
+Now let's register a catalog::
+
+  >>> from zope.app.catalog.interfaces import ICatalog
+  >>> from zope.app.catalog.catalog import Catalog
+  >>> catalog = Catalog()
+  >>> provideUtility(catalog, ICatalog)
+
+And set it up the field index::
+
+  >>> from zope.app.catalog.field import FieldIndex
+  >>> catalog['menuNames'] = FieldIndex(
+  ...			   interface=IEntryNav,
+  ...			   field_name='getEntryMenuNameFirstLetter', 
+  ...			   field_callable=True
+  ... )
+
+  >>> catalog['created'] = FieldIndex(
+  ...			 interface=IEntry,
+  ...			 field_name='get_dc_created',
+  ...			 field_callable=True
+  ... )
+
+
+Now let's create some objects so that they'll be cataloged::
+
+  >>> root = testEntryStructure()
+
+Now iterate through them and index them
+
+  >>> def index_all(node):
+  ...	  for item in node.values():
+  ...	      catalog.index_doc(intid.register(item), item)
+  ...	      index_all(item)
+  ...
+  >>> index_all(root)
+
+There should be 10 intid items in the catalog, 
+because one has no MenuName and should not get cataloged
+
+  >>> len(list(catalog.apply({'menuNames':(None, None)})))
+  10
+  >>> len(list(catalog.searchResults(menuNames=(None, None))))
+  10
+
+  >>> for item in list(catalog.searchResults(menuNames=(None, None))):
+  ...	  print item.__name__
+  entry1
+  entry1_1
+  entry1_1_1
+  entry1_1_2
+  entry1_1_3
+  entry1_2
+  entry1_2_1
+  entry2
+  entry2_1
+  entry2_1_1
+  
+  >>> from sgs.entry.interfaces import IEntryNav
+  >>> for item in list(catalog.searchResults(menuNames=('S', 'S'))):
+  ...	  IEntryNav(item).name
+  u'Sozial'
+
+Now lets see, if there are 10+1 entries in the other Field Index, where all entries should exist
+
+  >>> len(list(catalog.apply({'created':(None, None)})))
+  11

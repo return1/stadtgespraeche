@@ -1,0 +1,41 @@
+<configure
+        xmlns="http://namespaces.zope.org/zope"
+        i18n_domain="zope"
+        >
+
+<include package=".browser" />
+
+<class class=".entry.Entry" >
+    <require
+        permission="zope.View"
+        interface=".interfaces.IEntry" />
+    <require
+        permission="zope.View"
+        interface=".interfaces.IEntryContainer" />
+    <require
+        permission="zope.View"
+        interface=".interfaces.IEntryCountChildren" />
+    <require
+        permission="zope.ManageContent"
+        set_schema=".interfaces.IEntry" />
+    <require
+        permission="zope.ManageContent"
+        set_schema=".interfaces.IEntryCountChildren" />
+</class>
+
+<adapter factory=".entry.EntryNav"
+	 trusted="true"  />
+
+<class class=".entry.EntryNav" >
+    <require
+        permission="zope.View"
+        interface=".interfaces.IEntryNav" />
+    <require
+        permission="zope.ManageContent"
+        set_schema=".interfaces.IEntryNav" />
+</class>
+
+<subscriber handler=".entry.UpdateEntryChildrenOnAddSubscriber" />
+<subscriber handler=".entry.UpdateEntryChildrenOnRemoveSubscriber" />
+
+</configure>

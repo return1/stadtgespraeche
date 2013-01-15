@@ -1,0 +1,12 @@
+<metal:page use-macro="context/@@sgs.mastertemplate/master">
+
+<div metal:fill-slot="content" id="cont"><tal:define define="entries view/get_history"><a href="" tal:repeat="img entries/entries" tal:attributes="href string:${img/@@absolute_url}/entry.html"><img src="" tal:attributes="src string:${img/@@absolute_url}/@@resized?w=100&h=74" width="100" height="74" alt="" /></a>
+
+<a tal:condition="entries/batch/previous" class=color href="#" tal:attributes="href string:${request/URL}?start=${entries/batch/previous/start}">zur&uuml;ck</a>
+<a tal:condition="entries/batch/next" class=color href="#" tal:attributes="href string:${request/URL}?start=${entries/batch/next/start}">vor</a>
+
+</tal:define>
+
+</div>
+
+</metal:page>

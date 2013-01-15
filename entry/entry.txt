@@ -1,0 +1,55 @@
+=====================
+Test EntryNav Adapter
+=====================
+	
+  >>> from sgs.entry.entry import Entry
+  >>> from sgs.entry.interfaces import IEntryNav
+
+  >>> root = testEntryStructure()
+
+Let`s pick out entry1_1_1 and test getChildren and getSiblings
+
+  >>> entry =  root[u'entry1'][u'entry1_1'][u'entry1_1_1']
+  >>> entrynav = IEntryNav(entry)
+  >>> len(entrynav.getChildren())
+  0
+
+  >>> len(entrynav.getSiblings())
+  3
+
+Now test it with entry1_1
+
+  >>> entry =  root[u'entry1'][u'entry1_1']
+  >>> entrynav = IEntryNav(entry)
+  >>> len(entrynav.getChildren())
+  3
+
+  >>> len(entrynav.getSiblings())
+  2
+
+Check if the MenuName Annotation is set and remembered
+
+  >>> entrynav.name
+  u'Menschen'
+  
+  >>> entrynav.name = u'Sozial'
+  >>> entrynav.name
+  u'Sozial'
+
+Create another adapter and check if the menuname is still the same
+
+  >>> otheradapter = IEntryNav(entry)
+  >>> otheradapter.name
+  u'Sozial'
+
+
+Try the same with the EntryNav "order" key
+
+  >>> entrynav.getEntryMenuOrder()
+  12
+  >>> entrynav.setEntryMenuOrder(1)
+  >>> entrynav.getEntryMenuOrder()
+  1
+  >>> otheradapter = IEntryNav(entry)
+  >>> otheradapter.getEntryMenuOrder()
+  1

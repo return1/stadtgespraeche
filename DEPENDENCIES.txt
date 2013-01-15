@@ -1,0 +1,4 @@
+z3c.layer.minimal
+z3c.batching
+z3c.widget.tiny --> zc.ressourcelibrary
+z3c.image --> PIL

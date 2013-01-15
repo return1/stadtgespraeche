@@ -1,0 +1,108 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+	<include package=".browser" />
+
+	<interface
+		interface=".ISGS"
+		type="zope.publisher.interfaces.browser.IBrowserSkinType"
+		name="sgs"
+	/>
+
+        <!-- Home Adapter -->
+	<adapter factory=".adapters.HomeAdapter"
+		for="sgs.home.interfaces.ISGSHome"
+                provides=".interfaces.IHomeAdapter"
+         	trusted="true"
+	 	locate="true" /> 
+
+	<class class=".adapters.HomeAdapter" >
+		<require
+			permission="zope.View"
+		        interface=".interfaces.IHomeAdapter" />
+		<require
+		        permission="zope.ManageContent"
+		        set_schema=".interfaces.IHomeAdapter" />
+	</class>
+	
+	<!-- Info Adapter -->
+        <adapter factory=".adapters.InfoAdapter"
+                for="sgs.home.interfaces.ISGSHome"
+                provides=".interfaces.IInfoAdapter"
+                trusted="true"
+                locate="true" />
+
+	<class class=".adapters.InfoAdapter" >
+                <require
+                        permission="zope.View"
+                        interface=".interfaces.IInfoAdapter" />
+                <require
+                        permission="zope.ManageContent"
+                        set_schema=".interfaces.IInfoAdapter" />
+        </class>
+
+
+  	<!-- Links Adapter -->
+        <adapter factory=".adapters.LinksAdapter"
+		for="sgs.home.interfaces.ISGSHome"
+		provides=".interfaces.ILinksAdapter"
+                trusted="true"
+                locate="true" />
+
+        <class class=".adapters.LinksAdapter" >
+                <require
+                        permission="zope.View"
+                        interface=".interfaces.ILinksAdapter" />
+                <require
+                        permission="zope.ManageContent"
+                        set_schema=".interfaces.ILinksAdapter" />
+        </class>
+
+	<!-- Contributors Adapter -->
+        <adapter factory=".adapters.ContributorsAdapter"
+                for="sgs.home.interfaces.ISGSHome"
+                provides=".interfaces.IContributorsAdapter"
+                trusted="true"
+                locate="true" />
+
+        <class class=".adapters.ContributorsAdapter" >
+                <require
+                        permission="zope.View"
+                        interface=".interfaces.IContributorsAdapter" />
+                <require
+                        permission="zope.ManageContent"
+                        set_schema=".interfaces.IContributorsAdapter" />
+        </class>
+
+	<!-- Imprint Adapter -->
+        <adapter factory=".adapters.ImprintAdapter"
+                for="sgs.home.interfaces.ISGSHome"
+                provides=".interfaces.IImprintAdapter"
+                trusted="true"
+                locate="true" />
+
+        <class class=".adapters.ImprintAdapter" >
+                <require
+                        permission="zope.View"
+                        interface=".interfaces.IImprintAdapter" />
+                <require
+                        permission="zope.ManageContent"
+                        set_schema=".interfaces.IImprintAdapter" />
+        </class>
+
+	<!-- Technics Adapter -->
+        <adapter factory=".adapters.TechnicsAdapter"
+                for="sgs.home.interfaces.ISGSHome"
+                provides=".interfaces.ITechnicsAdapter"
+                trusted="true"
+                locate="true" />
+
+        <class class=".adapters.TechnicsAdapter" >
+                <require
+                        permission="zope.View"
+                        interface=".interfaces.ITechnicsAdapter" />
+                <require
+                        permission="zope.ManageContent"
+                        set_schema=".interfaces.ITechnicsAdapter" />
+        </class>
+
+</configure>

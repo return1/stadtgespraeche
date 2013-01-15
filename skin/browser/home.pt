@@ -1,0 +1,11 @@
+<metal:page use-macro="context/@@sgs.mastertemplate/master">
+
+<div metal:fill-slot="content" id="cont" class="usercontent"><div class="nowrap"><a href="#" tal:repeat="img view/random_images" tal:attributes="href string:${img/@@absolute_url}/entry.html"><img src="" tal:attributes="src string:${img/@@absolute_url}/@@resized?w=100&h=74" alt="" height="74" width="100"/></a></div>
+
+<p tal:replace="structure view/view_home" /></div>
+
+<metal:slot fill-slot="more">
+<div id="newpagecount"  class="nav1l"><span tal:replace="context/children">9076</span> Bilder gesamt</div>
+</metal:slot>
+
+</metal:page>

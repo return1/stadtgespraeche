@@ -1,0 +1,32 @@
+<metal:page use-macro="context/@@sgs.mastertemplate/master">
+
+<metal:slot fill-slot="headers">
+<script type="text/javascript">function popup(url,sizex,sizey){commands = 'resizable=0,scrollbars=0,'+sizex+','+sizey+'';newWindow=window.open(url,'popup',commands);}</script>
+</metal:slot>
+
+<div metal:fill-slot="content" id="cont">
+	<img id="entry" src="" alt="" tal:attributes="src context/@@absolute_url; alt context/caption" />
+	<div id="entrytxt" class="usercontent">
+		<p tal:replace="structure context/description" />
+		<p class="ftg" tal:content="context/caption">subnote | test</p>
+		<p class=ch tal:define="children view/get_children" tal:condition="children"><span tal:replace="children">1604</span> Bilder in dieser Rubrik</p>
+	</div>
+</div>
+
+<metal:slot fill-slot="more">
+	<div id="batch" class="normal" tal:define="viewdict view/get_batching">
+	<a class="color" tal:condition="viewdict/prev_url" tal:attributes="href viewdict/prev_url">zur&uuml;ck</a>
+	<tal:repeat repeat="item viewdict/batch">
+		<a tal:attributes="href string:${item/url}/entry.html; class item/class" tal:content="python:repeat['item'].number()+viewdict['batch'].start" />
+	</tal:repeat>
+	<a class="color" tal:condition="viewdict/next_url" tal:attributes="href viewdict/next_url">vor</a>
+	</div>
+	<div id="popup" tal:condition="view/has_largeimage" tal:define="x python:context.largeImage.getImageSize()[0]; y python:context.largeImage.getImageSize()[1]">
+		<a tal:attributes="href 
+string:javascript:popup('${context/@@absolute_url}/++attribute++largeImage','width=${x}','height=${y}')">
+		<img src="/@@/images/enlarge.gif" alt="vergr&ouml;&szlig;ern" />
+		</a>
+	</div>
+</metal:slot>
+
+</metal:page>

@@ -1,0 +1,25 @@
+<configure xmlns="http://namespaces.zope.org/browser">
+
+        <addMenuItem
+                class="..home.SGSHome"
+                title="SGS Site"
+                permission="zope.ManageContent"
+                view="AddSGSHome.html"
+        />
+
+        <addform
+                label="Add SGS Site"
+                name="AddSGSHome.html"
+                schema="..interfaces.ISGSHome"
+                content_factory="..home.SGSHome"
+                permission="zope.ManageContent"
+        />
+
+        <containerViews
+                for="..interfaces.ISGSHome"
+                contents="zope.ManageContent"
+                add="zope.ManageContent"
+                index="zope.ManageContent"
+        />
+
+</configure>

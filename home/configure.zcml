@@ -1,0 +1,22 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+<include package=".browser" />
+
+<class class=".home.SGSHome">
+    <require
+        permission="zope.View"
+        interface=".interfaces.ISGSHome" />
+    <require
+        permission="zope.View"
+        interface="sgs.entry.interfaces.IEntryCountChildren" />
+    <require
+        permission="zope.ManageContent"
+        set_schema=".interfaces.ISGSHome" />
+    <require
+        permission="zope.ManageContent"
+        set_schema="sgs.entry.interfaces.IEntryCountChildren" />
+</class>
+
+<subscriber handler=".home.setupSGSSiteSubscriber" />
+
+</configure>

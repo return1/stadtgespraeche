@@ -1,0 +1,9 @@
+<metal:page use-macro="context/@@sgs.mastertemplate/master">
+
+<div metal:fill-slot="content" id="cont" class="textonly usercontent">
+
+<p tal:replace="structure view/view_technics" />
+
+</div>
+
+</metal:page>

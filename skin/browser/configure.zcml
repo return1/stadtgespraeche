@@ -1,0 +1,125 @@
+<configure xmlns="http://namespaces.zope.org/browser"
+	   xmlns:zope="http://namespaces.zope.org/zope">
+
+        <include package=".errors" />
+        <include file="zmi.zcml" />
+
+	<!-- mastertemplate -->
+	<page
+		for="*"
+		name="sgs.mastertemplate"
+		permission="zope.Public"
+		layer="sgs.skin.ISGS"
+		template="mastertemplate.pt"
+		/>
+	
+	<!-- ressources -->
+	<resourceDirectory
+        	name="css"
+	        directory="css"
+	        layer="sgs.skin.ISGS"
+	        />
+	<resourceDirectory
+	        name="images"
+	        directory="images"
+	        layer="sgs.skin.ISGS"
+	        />
+
+	<!--pil resize view -->
+	<page
+		for="zope.app.file.interfaces.IImage"
+		name="resized"
+		permission="zope.Public"
+		class="z3c.image.proc.browser.ResizedImageView"
+		layer="sgs.skin.ISGS"
+		/>
+
+	<!-- the entry! -->
+	<page
+                for="sgs.entry.interfaces.IEntry"
+                name="entry.html"
+		class=".EntryView"
+                template="entry.pt"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+	<!-- register the image view on the layer -->
+	<page
+		name="index.html"
+		for="zope.app.file.interfaces.IImage"
+		permission="zope.View"
+		allowed_attributes="__call__ tag"
+		class="zope.app.file.browser.image.ImageData"
+		layer="sgs.skin.ISGS"
+		/>
+
+	<!-- special pages -->
+	<page
+		for="sgs.home.interfaces.ISGSHome"
+		name="index.html"
+		template="home.pt"
+		class=".adapters.ViewContentPages"
+		permission="zope.Public"
+		layer="sgs.skin.ISGS"
+		/>
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="info.html"
+                template="info.pt"
+                class=".adapters.ViewContentPages"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="links.html"
+                template="links.pt"
+                class=".adapters.ViewContentPages"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="sammler.html"
+                template="contributors.pt"
+                class=".adapters.ViewContentPages"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="impressum.html"
+                template="imprint.pt"
+                class=".adapters.ViewContentPages"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+
+	 <page
+                for="sgs.home.interfaces.ISGSHome"
+                name="orientierung.html"
+                template="orientation.pt"
+                class=".OrientationView"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+	
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="neu.html"
+                template="new_entries.pt"
+                class=".NewEntriesView"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="technik"
+                template="technics.pt"
+                class=".adapters.ViewContentPages"
+                permission="zope.Public"
+                layer="sgs.skin.ISGS"
+                />
+
+</configure>

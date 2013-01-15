@@ -1,0 +1,46 @@
+<configure xmlns="http://namespaces.zope.org/browser">
+
+	<page
+		for="sgs.home.interfaces.ISGSHome"
+		name="editHome.html"
+		class=".adapters.EditHome"
+		permission="zope.ManageContent"
+		menu="zmi_views" title="Edit Home"
+	/>
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="editInfo.html"
+                class=".adapters.EditInfo"
+                permission="zope.ManageContent"
+                menu="zmi_views" title="Edit Info"
+        />
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="editLinks.html"
+                class=".adapters.EditLinks"
+                permission="zope.ManageContent"
+                menu="zmi_views" title="Edit Links"
+        />
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="editContributors.html"
+                class=".adapters.EditContributors"
+                permission="zope.ManageContent"
+                menu="zmi_views" title="Edit Sammler"
+        />
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="editImprint.html"
+                class=".adapters.EditImprint"
+                permission="zope.ManageContent"
+                menu="zmi_views" title="Edit Impressum"
+        />
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="editTechnics.html"
+                class=".adapters.EditTechnics"
+                permission="zope.ManageContent"
+                menu="zmi_views" title="Edit Technik"
+        />
+
+</configure>

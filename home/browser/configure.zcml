@@ -1,0 +1,22 @@
+<configure xmlns="http://namespaces.zope.org/browser">	
+
+	<include file="zmi.zcml" />
+
+	<page
+                for="sgs.home.interfaces.ISGSHome"
+                name="recount"
+                class=".EntryRecount"
+                permission="zope.ManageContent"
+		menu="zmi_views" title="Recount all Entries"
+        />
+
+	<!-- at home we have to create a special nav -->
+	<view
+		for="sgs.home.interfaces.ISGSHome"
+		name="getEntryNavigation"
+		class=".HomeEntryNavigation"
+		permission="zope.View"
+		layer="z3c.layer.minimal.IMinimalBrowserLayer"
+	/>
+
+</configure>

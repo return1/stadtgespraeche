@@ -1,0 +1,42 @@
+<configure xmlns="http://namespaces.zope.org/browser">
+
+<!--zmi -->
+<containerViews
+      for="..interfaces.IEntry"
+      contents="zope.ManageContent"
+      add="zope.ManageContent"
+      />
+
+<addMenuItem
+      class="..entry.Entry"
+      title="SGS Entry"
+      permission="zope.ManageContent"
+      view="AddSGSEntry"
+      />
+
+<page
+	for="zope.app.container.interfaces.IAdding"
+	name="AddSGSEntry"
+	class=".EntryAddForm"
+	permission="zope.ManageContent"
+	/>
+
+<page
+	for="..interfaces.IEntry"
+	name="editSGSEntryNav"
+	class=".EntryEditForm"
+	permission="zope.ManageContent"
+	menu="zmi_views" title="Edit"
+	/>
+
+<!-- navigation view -->
+<view
+      for="sgs.entry.interfaces.IEntry"
+      name="getEntryNavigation"
+      class=".EntryNavigation"
+      permission="zope.View"
+      layer="z3c.layer.minimal.IMinimalBrowserLayer"
+      />
+
+</configure>
+
